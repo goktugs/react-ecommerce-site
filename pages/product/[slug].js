@@ -8,7 +8,6 @@ import { Store } from '../../utils/Store';
 
 export default function ProductScreen() {
   const { state, dispatch } = useContext(Store);
-
   const router = useRouter();
   const { query } = useRouter();
   const { slug } = query;
@@ -16,9 +15,11 @@ export default function ProductScreen() {
   if (!product) {
     return <div>Produt Not Found</div>;
   }
+
   const addToCartHandler = () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
+
     if (product.countInStock < quantity) {
       alert('Sorry. Product is out of stock');
       return;
